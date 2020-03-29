@@ -1,0 +1,84 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div id="login" *ngIf="!registration;else register">
+    <h3 class="text-center text-white pt-5">Login form</h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form" action="" method="post">
+                        <h3 class="text-center text-info">Login</h3>
+                        <h6 *ngIf="incorrect" style="color:red;">wrong login or password</h6>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Username:</label><br>
+                            <input type="text" name="username" id="username" [(ngModel)]="username"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+                            <input type="password" name="password" id="password" [(ngModel)]="password"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" (click)="logIn()" class="btn btn-info btn-md"
+                                value="submit">
+                        </div>
+                        <div id="register-link" class="text-right">
+                            <a class="text-info" (click)="regOpen()">Register here</a>
+
+                        </div>
+                        <h6 style="margin:20px;" *ngIf="!ischecked">fill all data</h6>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #register>
+    <div id="register">
+        <h3 class="text-center text-white pt-5">Register</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <h3 class="text-center text-info">Register</h3>
+                            <div class="form-group">
+                                    <div style="display:inline-flex;">
+                                            <label for="username" class="text-info">Username:</label>
+                                            <p *ngIf="message" style="color:red;">{{message}}</p>
+                                    </div><br>
+                                <input type="text" name="username" id="username" [(ngModel)]="username"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" [(ngModel)]="password"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <div style="display:inline-flex;"><label for="conpassword" class="text-info">Confirm
+                                        password:</label>
+                                    <p *ngIf="!isequal" style="color:red;">is incorrect</p>
+                                </div><br>
+                                <input type="password" name="password" id="conpassword" [(ngModel)]="conpassword"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" (click)="SignUp()" class="btn btn-info btn-md"
+                                    value="submit">
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a class="text-info" (click)="regClose()">Login here</a>
+                            </div>
+                            <h6 style="margin:20px;" *ngIf="!ischecked">fill all data</h6>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
