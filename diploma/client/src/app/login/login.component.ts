@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
 
   public registration = false;
   ngOnInit() {
-    this.apiService.getUsers().subscribe(res => {
-      console.log(res)
-    });
+    // this.apiService.getUsers().subscribe(res => {
+    //   console.log(res)
+    // });
   }
 
   user(id, username, password) {
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     let user = this.user(1, this.username, this.password)
     this.apiService.signIn(user).subscribe(res => {
       if (res.message == "Succes") {
+        sessionStorage.setItem('user',res.user)
         this.router.navigate(['bar'])
         this.incorrect = false
       } else {
@@ -59,7 +60,6 @@ export class LoginComponent implements OnInit {
     this.isequal = this.password == this.conpassword ? true : false
     if (!this.isequal) return
     let user = this.user(1, this.username, this.password)
-    console.log(user)
     this.apiService.createUsers(user).subscribe(res => {
       if (res.message == 'Succes') {
         this.regClose()

@@ -23,8 +23,10 @@ currentUrl
   }
   
   async ngOnInit() {
-    // await this.loadNewsItems();
-    if (this.router.url === '/') {
+    let user = sessionStorage.getItem('user')
+    if (user) {
+      this.router.navigate(['bar'])
+    } else if (this.router.url === '/') {
       this.router.navigate(['login'])
     }
   }
@@ -34,21 +36,4 @@ currentUrl
       console.log(res)
     });
   }
-
-  // async addPost() {
-  //   this.user ={
-  //     id: this.id,
-  //     name: this.name,
-  //     address: this.address,
-  //     age: this.age,
-  //     created_at: this.created_at,
-  //     updated_at: this.updated_at
-  //   }
-  //   this.apiService.createUsers(this.user).subscribe(res => {
-  //     console.log(res)
-  //   });
-  //   this.apiService.getUsers().subscribe(res => {
-  //     console.log(res)
-  //   });
-  // }
 }
