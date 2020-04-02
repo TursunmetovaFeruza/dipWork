@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BarComponent } from './bar/bar.component';
+import { StudentMainComponent } from './student-main/student-main.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BarComponent } from './bar/bar.component';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    BarComponent
+    BarComponent,
+    StudentMainComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
