@@ -23,7 +23,7 @@ func GetAllUsers(c *gin.Context) {
 
 	for rows.Next() {
 		p := model_user.SignIn{}
-		err = rows.Scan(&p.ID, &p.Username, &p.Password, &p.CreatedAt, &p.UpdatedAt)
+		err = rows.Scan(&p.ID, &p.Username, &p.Password, &p.CreatedAt, &p.UpdatedAt, &p.UserInfo)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -41,7 +41,7 @@ func GetAllUsers(c *gin.Context) {
 
 func createUserTable() {
 	db := PostSQLConfig()
-	_, err := db.Exec("CREATE TABLE users (id INTEGER PRIMARY KEY, username text,password text,created_at TIME NOT NULL, updated_at TIME NOT NULL)")
+	_, err := db.Exec("CREATE TABLE users (id INTEGER PRIMARY KEY, username text,password text,created_at TIME NOT NULL, updated_at TIME NOT NULL, user_info_id INTEGER)")
 	if err != nil {
 		fmt.Println("Problem with creating user table", err)
 	}
@@ -110,8 +110,8 @@ func SignIn(c *gin.Context) {
 		return
 	}
 	stored := model_user.SignIn{}
-	res := db.QueryRow("select password from users where username=$1", user.Username)
-	err = res.Scan(&stored.Password)
+	res := db.QueryRow("select password, user_info_id from users where username=$1", user.Username)
+	err = res.Scan(&stored.Password, &stored.UserInfo)
 	if err != nil {
 		fmt.Println("signIn problem:", err)
 	}
@@ -123,6 +123,7 @@ func SignIn(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Succes",
 			"user":    &user.Username,
+			"user_id": &stored.UserInfo,
 		})
 	}
 	defer db.Close()

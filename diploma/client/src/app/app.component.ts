@@ -10,30 +10,26 @@ import {  Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   
-currentUrl
+
   constructor(
     private apiService: ApiService,
     private router: Router
 
   ) { 
 
-    router.events.subscribe((val)=>{
-      this.currentUrl = val;
-    })
   }
   
   async ngOnInit() {
     let user = sessionStorage.getItem('user')
+    localStorage.clear();
     if (user) {
-      this.router.navigate(['bar'])
+
+      if (this.router.url === '/') {
+        // this.router.navigate(['bar'])
+      }
     } else if (this.router.url === '/') {
       this.router.navigate(['login'])
     }
   }
 
-  async loadNewsItems() {
-    this.apiService.getUsers().subscribe(res => {
-      console.log(res)
-    });
-  }
 }
