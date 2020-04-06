@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component'
 import { StudentMainComponent } from './student-main/student-main.component';
 import { UsersComponent } from './users/users.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -25,10 +26,13 @@ const routes: Routes = [
         component: StudentMainComponent
       },
       {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
         path: ':type',
         component: MainMenuComponent
       },
-      
     ]
   },
 ];

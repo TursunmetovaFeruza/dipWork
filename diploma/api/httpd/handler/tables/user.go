@@ -2,175 +2,64 @@ package tables
 
 import (
 	"fmt"
-	"newsfeeder/config"
-	model_user "newsfeeder/httpd/models/user"
-	"strconv"
-	"time"
+	model_student "newsfeeder/httpd/models/student"
 
 	"github.com/gin-gonic/gin"
-	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	_ "github.com/lib/pq"
 )
 
-// Static Collection
-const UserCollection = "user"
-
-// Get DB from Mongo Config
-func MongoConfig() *mgo.Database {
-	db, err := config.GetMongoDB()
-	if err != nil {
-		fmt.Println(err)
-	}
-	return db
-}
-
-// Get All User Endpoint
-func GetAllUser(c *gin.Context) {
-	db := *MongoConfig()
-	fmt.Println("MONGO RUNNING: ", db)
-
-	users := model_user.Users{}
-	err := db.C(UserCollection).Find(bson.M{}).All(&users)
-
-	if err != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Get All User",
-		})
-		return
-	}
-
-	c.JSON(200, gin.H{
-		"user": &users,
-	})
-}
-
-// Get User Endpoint
 func GetUser(c *gin.Context) {
-	db := *MongoConfig()
-	fmt.Println("MONGO RUNNING: ", db)
+	db := PostSQLConfig()
+	var query string
+	userid := c.Request.URL.Query().Get("id")
+	usertype := c.Request.URL.Query().Get("type")
+	if usertype == "student" {
 
-	id := c.Param("id")                   // Get Param
-	idParse, errParse := strconv.Atoi(id) // Convert String to Int
-	if errParse != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Parse Param",
-		})
-		return
+		query = "select username, password, students.name as name, students.surname as surname , students.fathername as fathername, " +
+			"students.enrollment_year as enrollment_year, curses_number.number as course, language.name as language, groups.name as group, " +
+			"email, lection_id, faculty.name as faculty, school.name as school, specialty.name as speciality " +
+			"FROM users " +
+			"INNER JOIN students ON users.user_info_id =students.id " +
+			"INNER JOIN curses_number ON students.curs_id = curses_number.id  " +
+			"INNER JOIN language ON students.lang_id = language.id  " +
+			"INNER JOIN groups ON students.group_id = groups.id " +
+			"INNER JOIN faculty ON students.faculty_id = faculty.id " +
+			"INNER JOIN school ON students.school_id = school.id " +
+			"INNER JOIN specialty ON students.specialty_id = specialty.id " +
+			"where users.id =$1"
+	} else if usertype == "admin" {
+
+	} else if usertype == "master" {
+
 	}
+	// user := model_user.SignIn{}
 
-	user := model_user.User{}
-	err := db.C(UserCollection).Find(bson.M{"id": &idParse}).One(&user)
-
+	// var usertype string
+	user := model_student.StudentGet{}
+	res := db.QueryRow(query, userid)
+	err := res.Scan(&user.Username, &user.Password, &user.Name, &user.Surname, &user.Fathername, &user.EnrollmentYear, &user.Course, &user.Language,
+		&user.Group, &user.Email, &user.LectionId, &user.Faculty, &user.School, &user.Speciality)
 	if err != nil {
+		fmt.Println("signIn problem:", err)
+	} else {
 		c.JSON(200, gin.H{
-			"message": "Error Get User",
+			"message": "Succes",
+			"user":    &user,
 		})
-		return
 	}
 
-	c.JSON(200, gin.H{
-		"user": &user,
-	})
-}
+	// if err = bcrypt.CompareHashAndPassword([]byte(stored.Password), []byte(user.Password)); err != nil {
+	// 	c.JSON(200, gin.H{
+	// 		"message": "Not correct",
+	// 	})
+	// } else {
+	// 	c.JSON(200, gin.H{
+	// 		"message":  "Succes",
+	// 		"user":     &user.Username,
+	// 		"user_id":  &stored.UserInfo,
+	// 		"userType": &usertype,
+	// 	})
+	// }
+	defer db.Close()
 
-// Create User Endpoint
-func CreateUser(c *gin.Context) {
-	db := *MongoConfig()
-	fmt.Println("MONGO RUNNING: ", db)
-
-	user := model_user.User{}
-	fmt.Println(user, c)
-	err := c.Bind(&user)
-
-	if err != nil {
-		c.JSON(200, gin.H{
-			"message": err,
-		})
-		return
-	}
-
-	user.CreatedAt = time.Now()
-	user.UpdatedAt = time.Now()
-
-	err = db.C(UserCollection).Insert(user)
-
-	if err != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Insert User",
-		})
-		return
-	}
-
-	c.JSON(200, gin.H{
-		"message": "Succes Insert User",
-		"user":    &user,
-	})
-}
-
-// Update User Endpoint
-func UpdateUser(c *gin.Context) {
-	db := *MongoConfig()
-	fmt.Println("MONGO RUNNING: ", db)
-
-	id := c.Param("id")                   // Get Param
-	idParse, errParse := strconv.Atoi(id) // Convert String to Int
-	if errParse != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Parse Param",
-		})
-		return
-	}
-
-	user := model_user.User{}
-	err := c.Bind(&user)
-
-	if err != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Get Body",
-		})
-		return
-	}
-
-	user.ID = idParse
-	user.UpdatedAt = time.Now()
-
-	err = db.C(UserCollection).Update(bson.M{"id": &idParse}, user)
-	if err != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Update User",
-		})
-		return
-	}
-
-	c.JSON(200, gin.H{
-		"message": "Succes Update User",
-		"user":    &user,
-	})
-}
-
-// Delete User Endpoint
-func DeleteUser(c *gin.Context) {
-	db := *MongoConfig()
-	fmt.Println("MONGO RUNNING: ", db)
-
-	id := c.Param("id")                   // Get Param
-	idParse, errParse := strconv.Atoi(id) // Convert String to Int
-	if errParse != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Parse Param",
-		})
-		return
-	}
-
-	err := db.C(UserCollection).Remove(bson.M{"id": &idParse})
-	if err != nil {
-		c.JSON(200, gin.H{
-			"message": "Error Delete User",
-		})
-		return
-	}
-
-	c.JSON(200, gin.H{
-		"message": "Succes Delete User",
-	})
 }

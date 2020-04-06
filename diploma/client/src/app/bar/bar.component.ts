@@ -8,36 +8,46 @@ import { ApiService } from '../api.service';
   styleUrls: ['./bar.component.css']
 })
 export class BarComponent implements OnInit {
+  public url
+  public menuItems
 
   constructor(
     private apiService: ApiService,
     private router: Router
-  ) { }
-  public mainpage
-  public menuItems
+  ) { 
+    router.events.subscribe((val) => {
+      this.url = router.url
+    });
+  }
+  
+
   ngOnInit(): void {
     let user = sessionStorage.getItem('user')
-    this.apiService.getMenuItems(user).subscribe(res=>{
+    this.apiService.getMenuItems(user).subscribe(res => {
       this.menuItems = res.menu
       this.menuItems.forEach(el => {
         el.clicked = true
       })
-      if (this.router.url == '/bar') {
-        this.mainpage = true
-      } else {
-        this.mainpage = false
-      }
     })
   }
-goto(sysname){
-  this.menuItems.forEach(el => {
-    if (el.sysname == sysname) {
-      el.clicked = el.clicked ? false : true
-      this.router.navigate([el.url])
-      console.log(this.router.url)
-      this.mainpage = false
-    }
-  });
 
-}
+  goto(sysname) {
+    this.menuItems.forEach(el => {
+      if (el.sysname == sysname) {
+        el.clicked = el.clicked ? false : true
+        this.router.navigate([el.url])
+      } else {
+        el.clicked = true
+      }
+    });
+  }
+
+  Logout() {
+    sessionStorage.removeItem('user')
+    location.reload()
+  }
+
+  EditProfile() {
+    this.router.navigate(['bar/profile'])
+  }
 }

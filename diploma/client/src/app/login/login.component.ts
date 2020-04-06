@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
     let user = this.user(1, this.username, this.password)
     this.apiService.signIn(user).subscribe(res => {
       if (res.message == "Succes") {
-        sessionStorage.setItem('user',res.user)
+        sessionStorage.setItem('user',res.userType)
+        sessionStorage.setItem('userId',res.user_id)
         this.router.navigate(['bar'])
         this.incorrect = false
       } else {

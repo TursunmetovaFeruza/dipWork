@@ -13,6 +13,7 @@ import { BarComponent } from './bar/bar.component';
 import { StudentMainComponent } from './student-main/student-main.component';
 import { UsersComponent } from './users/users.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
     BarComponent,
     StudentMainComponent,
     UsersComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    ProfileComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

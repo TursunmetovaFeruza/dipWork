@@ -24,9 +24,9 @@ export class ApiService {
     let query = qs.stringify({user});
     return this.http.get<any>(`api/getMenuItems?${query}`)
   }
-  // getMessage201ByHour(startDate, finishDate) {
-  //   let query = qs.stringify({startDate, finishDate});
-  //   return this.http.get<any>(`/api/main/getMessage201ByHour?${query}`)
-  // }
+  getUser(id, type): any {
+    let query = qs.stringify({id, type});
+    return this.http.get<any>(`api/getUser?${query}`)
+  }
 
 }

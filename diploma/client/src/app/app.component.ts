@@ -10,13 +10,15 @@ import {  Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   
-
+public url
   constructor(
     private apiService: ApiService,
     private router: Router
 
   ) { 
-
+    router.events.subscribe((val) => {
+      this.url = router.url
+    });
   }
   
   async ngOnInit() {

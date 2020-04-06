@@ -1,1 +1,8 @@
-<p>main-menu works!</p>
+<div class="container"> 
+    <div class="row">
+        <ng-container *ngFor="let item of items">
+                <div (click)="goto(item.url)" class="menu col-sm-3">{{item.name}}</div>
+        </ng-container>           
+            
+    </div>
+    </div> 
