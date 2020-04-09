@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { normalizeGenFileSuffix } from '@angular/compiler/src/aot/util';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,11 @@ export class LoginComponent implements OnInit {
   public ischecked = true
   public isequal = true
   public message
-
+  public userType
+  public  options = [
+    { name: "student", value: 1 },
+    { name: "master", value: 2 }
+  ]
   constructor(
     private apiService: ApiService,
     private router: Router
@@ -24,9 +29,7 @@ export class LoginComponent implements OnInit {
 
   public registration = false;
   ngOnInit() {
-    // this.apiService.getUsers().subscribe(res => {
-    //   console.log(res)
-    // });
+   
   }
 
   user(id, username, password) {
@@ -35,7 +38,9 @@ export class LoginComponent implements OnInit {
       username: username,
       password: password,
       created_at: new Date(),
-      updated_at: new Date()
+      updated_at: new Date(),
+      user_info_id : null,
+      usertype: this.userType?this.userType:0
     }
   }
 

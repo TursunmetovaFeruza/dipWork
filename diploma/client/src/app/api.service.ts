@@ -11,8 +11,14 @@ export class ApiService {
 
   constructor(private http: HttpClient, ) {
   }
-  getUsers() {
-    return this.http.get<any>('api/users');
+  GetAllUsers() {
+    return this.http.get<any>('api/GetAllUsers');
+  }
+  GetAllStudents() {
+    return this.http.get<any>('api/GetAllStudents');
+  }
+  GetAllMaters() {
+    return this.http.get<any>('api/GetAllMaters');
   }
   createUsers(value): any {
     return this.http.post<any>('api/users', value);

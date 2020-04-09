@@ -7,6 +7,8 @@ import { StudentMainComponent } from './student-main/student-main.component';
 import { UsersComponent } from './users/users.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {
@@ -30,9 +32,21 @@ const routes: Routes = [
         component: ProfileComponent
       },
       {
+        path: 'attendance',
+        component: AttendanceComponent
+      },
+      {
         path: ':type',
         component: MainMenuComponent
       },
+      {
+        path: 'users/:child',
+        component: UsersComponent
+      },
+      {
+        path: 'add/:child',
+        component: AddComponent
+      }
     ]
   },
 ];

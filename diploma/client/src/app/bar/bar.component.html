@@ -40,7 +40,7 @@
                             {{item.name}} <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                         <ul id="submenu-2" [ngClass]="{collapse:item.clicked}">
                             <ng-container *ngFor="let sub of item.child">
-                                <li><a href="index.html" [routerLink]="[sub.url]" routerLinkActive="active"><i
+                                <li><a  (click)="gotosub(sub.url)" routerLinkActive="active"><i
                                             class="fa fa-angle-double-right"></i> {{sub.name}}</a></li>
                             </ng-container>
                         </ul>

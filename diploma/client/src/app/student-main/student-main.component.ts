@@ -10,6 +10,8 @@ export class StudentMainComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    
   }
 
 }

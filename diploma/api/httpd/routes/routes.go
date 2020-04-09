@@ -13,7 +13,9 @@ func (c Routes) StartGin() {
 	r := gin.Default()
 	api := r.Group("/api")
 	{
-		api.GET("/users", handle_user.GetAllUsers)
+		api.GET("/GetAllUsers", handle_user.GetAllUsers)
+		api.GET("/GetAllStudents", handle_user.GetAllStudents)
+		api.GET("/GetAllMaters", handle_user.GetAllMaters)
 		api.POST("/user", handle_user.SignIn)
 		api.POST("/users", handle_user.SignUp)
 		api.GET("/getMenuItems", handle_user.GetAllItems)

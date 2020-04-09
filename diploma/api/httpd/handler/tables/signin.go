@@ -23,7 +23,7 @@ func GetAllUsers(c *gin.Context) {
 
 	for rows.Next() {
 		p := model_user.SignIn{}
-		err = rows.Scan(&p.ID, &p.Username, &p.Password, &p.CreatedAt, &p.UpdatedAt, &p.UserInfo)
+		err = rows.Scan(&p.ID, &p.Username, &p.Password, &p.CreatedAt, &p.UpdatedAt, &p.UserInfo, &p.UserType)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -60,7 +60,7 @@ func SignUp(c *gin.Context) {
 		})
 		return
 	}
-
+	fmt.Println(user)
 	stored := model_user.SignIn{}
 	check_username := db.QueryRow("select username from users where username=$1", user.Username)
 	err = check_username.Scan(&stored.Username)
@@ -85,8 +85,8 @@ func SignUp(c *gin.Context) {
 		repos = append(repos, p)
 	}
 	index := repos[0].ID + 1
-	res, err := db.Exec("insert into users (id, username, password,created_at,updated_at) values ( $1, $2,$3,$4,$5)",
-		index, user.Username, hashedPassword, time.Now(), time.Now())
+	res, err := db.Exec("insert into users (id, username, password,created_at,updated_at,user_info_id,usertype) values ( $1, $2,$3,$4,$5,$6,$7)",
+		index, user.Username, hashedPassword, time.Now(), time.Now(), nil, user.UserType)
 	if err != nil {
 		fmt.Println("create error:", err)
 	}

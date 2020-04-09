@@ -41,7 +41,9 @@ export class BarComponent implements OnInit {
       }
     });
   }
-
+  gotosub(url){
+    this.router.navigate([url])
+  }
   Logout() {
     sessionStorage.removeItem('user')
     location.reload()

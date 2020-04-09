@@ -1,8 +1,22 @@
-<div class="container"> 
-    <div class="row">
-        <ng-container *ngFor="let item of items">
-                <div (click)="goto(item.url)" class="menu col-sm-3">{{item.name}}</div>
-        </ng-container>           
-            
-    </div>
-    </div> 
+<div class="divcon">
+    <table class="table table-hover table-bordered table-sm loading table-striped">
+        <thead class="table-active">
+            <tr border=0></tr>
+            <tr>
+                <ng-container *ngFor="let name of sysNames">
+                    <th>{{name.label}}</th>
+                    <!-- <p-dropdown [options]="items" [(ngModel)]="selectedCar" optionLabel="[name.name]"></p-dropdown> -->
+
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of items">
+                <ng-container *ngFor="let name of sysNames">
+                    <td *ngIf="name.type !== 'date'">{{name.name && name.name == 'password' ? '*** ':user[name.name]}}</td>
+                    <td *ngIf="name.type == 'date'"> {{ user[name.name] | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+</div>

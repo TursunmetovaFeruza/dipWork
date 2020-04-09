@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -12,6 +13,7 @@ export class MainMenuComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     private apiService: ApiService,
+    private router: Router
 
   ) { }
 
@@ -31,7 +33,7 @@ export class MainMenuComponent implements OnInit {
     })
 }
   goto(url) {
-
+    this.router.navigate([url])
   }
 
 

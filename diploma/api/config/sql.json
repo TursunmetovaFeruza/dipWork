@@ -1,0 +1,79 @@
+-- create table master(
+-- id int primary key,
+-- name varchar not null,
+-- surname varchar ,
+-- fathername varchar,
+-- email varchar not null,
+-- lection_id json,
+-- 	faculty_id int not null,
+-- 	school_id int not null
+-- )
+-- select * from students
+--  update students set lection_id =  lection_id || '{1,2,3}' where id = 1
+-- update students set lection_id =  null where id = 1
+-- create table attendance(
+-- id int not null primary key,
+-- lectionid int not null,
+-- masterid int not null,
+-- starttime time not null,
+-- endtime time not null,
+-- students json)
+
+ select * from master
+
+select   master.name as name, master.surname as surname , master.fathername as fathername,
+ email, faculty.name as faculty, school.name as school
+  FROM master
+ INNER JOIN faculty ON master.faculty_id = faculty.id
+INNER JOIN school ON master.school_id = school.id
+
+
+-- insert into students (id,name,surname, fathername,enrollment_year,curs_id,lang_id,group_id, email,lection_id,faculty_id,school_id,specialty_id) 
+-- values (2,'Lee','Don','Mo',2016,1,1,1,'ledon@gmail.com',array[1,2,3],1,1,1)
+
+--  select  username, password, students.name as name, students.surname as surname , students.fathername as fathername, 
+--  students.enrollment_year as enrollment_year, curses_number.number as course, language.name as language, groups.name as group,
+--   email, faculty.name as faculty, school.name as school, specialty.name as speciality 
+--    FROM users
+--   INNER JOIN students ON users.user_info_id =students.id 
+--   INNER JOIN curses_number ON students.curs_id = curses_number.id  
+--   INNER JOIN language ON students.lang_id = language.id  
+--   INNER JOIN groups ON students.group_id = groups.id 
+--   INNER JOIN faculty ON students.faculty_id = faculty.id 
+--  INNER JOIN school ON students.school_id = school.id 
+--  INNER JOIN specialty ON students.specialty_id = specialty.id 
+--  where users.id = 1
+
+
+
+--  where users.id = 1
+
+insert into menu (id,name,url,sysname,userinfo, child) 
+values (4, 'Добавить', 'bar/add','add','admin',
+	   '[
+    {
+        "url": "bar/add/students",
+        "name": "Добавить студнета",
+        "sysname": "students"
+    },
+    {
+        "url": "bar/add/masters",
+        "name": "Добавить преподавателья",
+        "sysname": "masters"
+    },
+    {
+        "url": "bar/add/credentials",
+        "name": "Добавить учетную запись",
+        "sysname": "credentials"
+    },
+    {
+        "url": "bar/add/events",
+        "name": "Добавить event",
+        "sysname": "events"
+    },
+    {
+        "url": "bar/add/lections",
+        "name": "Добавить лекцию",
+        "sysname": "lections"
+    }
+]')

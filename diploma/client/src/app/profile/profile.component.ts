@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 
   ) { }
   public user
+  public isdisable = true
   ngOnInit(): void {
     let userType = sessionStorage.getItem('user')
     let id = sessionStorage.getItem('userId')
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
       this.user = res.user
     });
     if (userType == 'admin') {
-
+      this.isdisable = false
     } else if (userType == 'student') {
       // getUser(id, type) 
     } else if (userType == 'master') {

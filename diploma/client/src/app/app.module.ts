@@ -14,6 +14,8 @@ import { StudentMainComponent } from './student-main/student-main.component';
 import { UsersComponent } from './users/users.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { AddComponent } from './add/add.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ProfileComponent } from './profile/profile.component';
     StudentMainComponent,
     UsersComponent,
     MainMenuComponent,
-    ProfileComponent
+    ProfileComponent,
+    AttendanceComponent,
+    AddComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
