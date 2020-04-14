@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Регистрация Отпечатков Пальца Студентов</h1>
+        
+    <form [formGroup]="form" (ngSubmit)="submit()">
+            
+        <div class="form-group">
+            <label for="website">Выберите студентов:</label>
+            <div *ngFor="let web of websiteList">
+              <label>
+                <input type="checkbox" [value]="web.id" (change)="onCheckboxChange($event)" />
+                {{web.surname}} {{web.name}} {{web.fathername}}
+              </label>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
+            <input type="file" name="file" id="file" (change)="handleFileInput($event)" />
+        </button>
+        
+    </form>
+</div>

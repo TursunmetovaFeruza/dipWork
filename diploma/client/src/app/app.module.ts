@@ -18,7 +18,8 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { AddComponent } from './add/add.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import "chosen-js"
+import { FingerComponent } from './finger/finger.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import "chosen-js"
     MainMenuComponent,
     ProfileComponent,
     AttendanceComponent,
-    AddComponent
+    AddComponent,
+    FingerComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -42,6 +44,7 @@ import "chosen-js"
     AppRoutingModule,
     FontAwesomeModule,
     DropdownModule,
+    ReactiveFormsModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

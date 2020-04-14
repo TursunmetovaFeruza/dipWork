@@ -34,8 +34,10 @@ export class BarComponent implements OnInit {
   goto(sysname) {
     this.menuItems.forEach(el => {
       if (el.sysname == sysname) {
+        el.clicked = true?false:true
         this.router.navigate([el.url])
       } 
+      el.clicked = false;
     });
   }
   gotosub(url){

@@ -186,11 +186,5 @@ export class ProfileComponent implements OnInit {
     });
 
   }
-  handleFileInput($event){
-    console.log($event.target.files[0].type)
-    
-    this.apiService.UploadFile($event.target.files[0]).subscribe(res => {
-      console.log(res)
-    });
-  }
+
 }

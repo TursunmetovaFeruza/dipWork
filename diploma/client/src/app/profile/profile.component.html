@@ -17,21 +17,22 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" value="{{user?.name}}"[ngModelOptions]="{standalone: true}" [(ngModel)]="name" [disabled]="isdisable" class="form-control">
+                                <input type="text" value="{{user?.name}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="name" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Surname</label>
                             <div class="col-sm-10">
-                                <input type="text" value="{{user?.surname}}"[ngModelOptions]="{standalone: true}" [(ngModel)]="surname" [disabled]="isdisable"
-                                    class="form-control">
+                                <input type="text" value="{{user?.surname}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="surname" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Fathername</label>
                             <div class="col-sm-10">
-                                <input type="text" value="{{user?.fathername}}"[ngModelOptions]="{standalone: true}" [(ngModel)]="fathername" [disabled]="isdisable"
-                                    class="form-control">
+                                <input type="text" value="{{user?.fathername}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="fathername" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -45,9 +46,11 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Faculty</label>
                             <div class="col-sm-10">
-                                <input type="tel" value="{{user?.faculty}}" class="form-control" *ngIf="!isCreated" [disabled]="isdisable">
-                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="faculty" [ngModelOptions]="{standalone: true}">
-                                    <option *ngFor="let o of faculties" value = "{{o.id}}">
+                                <input type="tel" value="{{user?.faculty}}" class="form-control" *ngIf="!isCreated"
+                                    [disabled]="isdisable">
+                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="faculty"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let o of faculties" value="{{o.id}}">
                                         {{o.name}}
                                     </option>
                                 </select>
@@ -56,9 +59,11 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">School</label>
                             <div class="col-sm-10">
-                                <input type="tel" value="{{user?.school}}" class="form-control" *ngIf="!isCreated" [disabled]="isdisable">
-                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="school" [ngModelOptions]="{standalone: true}">
-                                    <option *ngFor="let o of schools" value = "{{o.id}}">
+                                <input type="tel" value="{{user?.school}}" class="form-control" *ngIf="!isCreated"
+                                    [disabled]="isdisable">
+                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="school"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let o of schools" value="{{o.id}}">
                                         {{o.name}}
                                     </option>
                                 </select>
@@ -69,19 +74,22 @@
                             <div class="col-sm-10">
                                 <input type="email" value="{{user?.speciality}}" *ngIf="!isCreated" class="form-control"
                                     [disabled]="isdisable">
-                                    <select class="form-control" *ngIf="isCreated" [(ngModel)]="speciality" [ngModelOptions]="{standalone: true}">
-                                        <option *ngFor="let o of specialities" value = "{{o.id}}">
-                                            {{o.name}}
-                                        </option>
-                                    </select>
+                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="speciality"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let o of specialities" value="{{o.id}}">
+                                        {{o.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div *ngIf="isStudent" class="form-group">
                             <label class="col-sm-2 control-label">Group</label>
                             <div class="col-sm-10">
-                                <input type="tel" value="{{user?.group}}" class="form-control" *ngIf="!isCreated" [disabled]="isdisable">
-                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="group" [ngModelOptions]="{standalone: true}" >
-                                    <option *ngFor="let o of groups" value = "{{o.id}}">
+                                <input type="tel" value="{{user?.group}}" class="form-control" *ngIf="!isCreated"
+                                    [disabled]="isdisable">
+                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="group"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let o of groups" value="{{o.id}}">
                                         {{o.name}}
                                     </option>
                                 </select>
@@ -90,16 +98,18 @@
                         <div *ngIf="isStudent" class="form-group">
                             <label class="col-sm-2 control-label">Enrollmentyear</label>
                             <div class="col-sm-10">
-                                <input type="tel" value="{{user?.enrollmentyear}}" [ngModelOptions]="{standalone: true}"[(ngModel)]="enyear" [disabled]="isdisable"
-                                    class="form-control">
+                                <input type="tel" value="{{user?.enrollmentyear}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="enyear" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                         <div *ngIf="isStudent" class="form-group">
                             <label class="col-sm-2 control-label">Course</label>
                             <div class="col-sm-10">
-                                <input type="tel" value="{{user?.course}}" *ngIf="!isCreated" [disabled]="isdisable" class="form-control">
-                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="course" [ngModelOptions]="{standalone: true}">
-                                    <option *ngFor="let o of courses" value = "{{o.id}}">
+                                <input type="tel" value="{{user?.course}}" *ngIf="!isCreated" [disabled]="isdisable"
+                                    class="form-control">
+                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="course"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let o of courses" value="{{o.id}}">
                                         {{o.number}}
                                     </option>
                                 </select>
@@ -108,15 +118,17 @@
                         <div *ngIf="isStudent" class="form-group">
                             <label class="col-sm-2 control-label">Language</label>
                             <div class="col-sm-10">
-                                <input type="tel" value="{{user?.lang}}" *ngIf="!isCreated" [disabled]="isdisable" class="form-control">
-                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="lang" [ngModelOptions]="{standalone: true}" >
-                                    <option *ngFor="let o of langs"   value = "{{o.id}}">
+                                <input type="tel" value="{{user?.lang}}" *ngIf="!isCreated" [disabled]="isdisable"
+                                    class="form-control">
+                                <select class="form-control" *ngIf="isCreated" [(ngModel)]="lang"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let o of langs" value="{{o.id}}">
                                         {{o.name}}
                                     </option>
                                 </select>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
 
@@ -128,21 +140,22 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">
-                                <input type="text" value="{{user?.username}}"[ngModelOptions]="{standalone: true}" [(ngModel)]="username" [disabled]="isdisable"
-                                    class="form-control">
+                                <input type="text" value="{{user?.username}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="username" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                         <div *ngIf="isStudent || isMaster" class="form-group">
                             <label class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="text" value="{{user?.email}}" [ngModelOptions]="{standalone: true}"[(ngModel)]="email" [disabled]="isdisable" class="form-control">
+                                <input type="text" value="{{user?.email}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="email" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" value="{{user?.password}}" [ngModelOptions]="{standalone: true}"[(ngModel)]="password" [disabled]="isdisable"
-                                    class="form-control">
+                                <input type="password" value="{{user?.password}}" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="password" [disabled]="isdisable" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -153,23 +166,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="form-group"  enctype="multipart/form-data" method="post">
-                    <label for="file">Choose File</label>
-                    <input type="file"
-                           id="file"
-                           enctype="multipart/form-data"
-                           (change)="handleFileInput($event)">
-                </div> -->
-            </form>
-           
-            <form  enctype="multipart/form-data" method="post">
-                <input type="file" name="file" id="file" (change)="handleFileInput($event)" />
-                
-                <!-- <input type="hidden"name="token" value="{{.}}" />
-                <input type="submit" value="upload" /> -->
             </form>
         </div>
     </div>
 </div>
-

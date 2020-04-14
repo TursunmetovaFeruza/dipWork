@@ -9,6 +9,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AddComponent } from './add/add.component';
+import { FingerComponent } from './finger/finger.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'users/:child',
         component: UsersComponent
+      },
+      {
+        path:'add/finger',
+        component:FingerComponent
       },
       {
         path: 'add/:child',

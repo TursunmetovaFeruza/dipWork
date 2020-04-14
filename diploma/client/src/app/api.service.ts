@@ -76,12 +76,13 @@ export class ApiService {
     let query = qs.stringify({id, type});
     return this.http.get<any>(`api/getUser?${query}`)
   }
-  UploadFile(file): any {
+  UploadFile(stud,file): any {
     var fd = new FormData();
     fd.append('file', file);
+      fd.append('s', stud);
     fd.append('filetype', 'csv');
     fd.append('f', 'json');
-    return this.http.post<any>('api/UploadFile',fd)
+    return this.http.post<any>('api/UploadFile',fd,stud)
   }
 
 }

@@ -28,7 +28,7 @@ func GetUser(c *gin.Context) {
 			"INNER JOIN specialty ON students.specialty_id = specialty.id " +
 			"where users.id =$1"
 	} else if usertype == "admin" {
-		query = "select username, password " +
+		query = "select  username, password " +
 			"FROM users " +
 			"where users.id =$1"
 	} else if usertype == "master" {
@@ -82,7 +82,7 @@ func GetUser(c *gin.Context) {
 
 func GetAllStudents(c *gin.Context) {
 	db := PostSQLConfig()
-	query := "select   students.name as name, students.surname as surname , students.fathername as fathername, " +
+	query := "select students.id,  students.name as name, students.surname as surname , students.fathername as fathername, " +
 		"students.enrollment_year as enrollment_year, curses_number.number as course, language.name as language, groups.name as group, " +
 		"email, lection_id, faculty.name as faculty, school.name as school, specialty.name as speciality " +
 		"FROM students " +
@@ -101,7 +101,7 @@ func GetAllStudents(c *gin.Context) {
 	defer rows.Close()
 	for rows.Next() {
 		user := model_student.StudentGet{}
-		err := rows.Scan(&user.Name, &user.Surname, &user.Fathername, &user.EnrollmentYear, &user.Course, &user.Language,
+		err := rows.Scan(&user.ID, &user.Name, &user.Surname, &user.Fathername, &user.EnrollmentYear, &user.Course, &user.Language,
 			&user.Group, &user.Email, &user.LectionId, &user.Faculty, &user.School, &user.Speciality)
 		if err != nil {
 			fmt.Println(err)
@@ -128,7 +128,7 @@ func GetAllStudents(c *gin.Context) {
 
 func GetAllMaters(c *gin.Context) {
 	db := PostSQLConfig()
-	query := "select   master.name as name, master.surname as surname , master.fathername as fathername, " +
+	query := "select master.id, master.name as name, master.surname as surname , master.fathername as fathername, " +
 		"email, lection_id, faculty.name as faculty, school.name as school " +
 		"FROM master " +
 		"INNER JOIN faculty ON master.faculty_id = faculty.id " +
@@ -142,7 +142,7 @@ func GetAllMaters(c *gin.Context) {
 	defer rows.Close()
 	for rows.Next() {
 		user := model_student.StudentGet{}
-		err := rows.Scan(&user.Name, &user.Surname, &user.Fathername,
+		err := rows.Scan(&user.ID, &user.Name, &user.Surname, &user.Fathername,
 			&user.Email, &user.LectionId, &user.Faculty, &user.School)
 		if err != nil {
 			fmt.Println(err)

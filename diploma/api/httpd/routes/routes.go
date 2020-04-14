@@ -34,5 +34,5 @@ func (c Routes) StartGin() {
 		api.GET("/GetUserType", handle_user.GetUserType)
 
 	}
-	r.Run("0.0.0.0:5000")
+	r.Run("0.0.0.0:2000")
 }
