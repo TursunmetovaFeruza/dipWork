@@ -21,13 +21,12 @@
                 </a>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователь <b
                         class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a (click)="EditProfile()"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                    <li><a (click)="EditProfile()"><i class="fa fa-fw fa-user"></i> Профиль</a></li>
                     <li class="divider"></li>
-                    <li><a (click)="Logout()"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    <li><a (click)="Logout()"><i class="fa fa-fw fa-power-off"></i> Выход</a></li>
                 </ul>
             </li>
         </ul>
@@ -38,7 +37,7 @@
                         <a href="#" data-toggle="collapse" data-target="#submenu-2" (click)="goto(item.sysname)"
                             [routerLink]="[item.url]" routerLinkActive="active"><i class="fa fa-fw fa-star"></i>
                             {{item.name}} <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-2" [ngClass]="{collapse:item.clicked}">
+                        <ul id="submenu-2" >
                             <ng-container *ngFor="let sub of item.child">
                                 <li><a  (click)="gotosub(sub.url)" routerLinkActive="active"><i
                                             class="fa fa-angle-double-right"></i> {{sub.name}}</a></li>

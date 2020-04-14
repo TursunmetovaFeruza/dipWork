@@ -19,4 +19,37 @@
             </tr>
         </tbody>
     </table>
+  
+     
 </div>
+
+<!-- <label > lesson 1</label>
+<p>{{stdate | date: 'yyyy-MM-dd'}}</p>
+<table class="table table-hover table-bordered table-sm loading table-striped">
+    <thead class="table-active">
+        <tr border=0></tr>
+        <tr >
+            <ng-container >
+                <th>Студент</th>
+                <th>Время входа</th>
+                <th>Опозадние</th>
+                
+                <p-dropdown [options]="items" [(ngModel)]="selectedCar" optionLabel="[name.name]"></p-dropdown>
+
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of items">
+            <td> {{user.surname}} {{user.name}} {{ user.fathername}}</td>
+            <td>{{stdate | date: 'yyyy-MM-dd'}}</td>
+            <td>20 мин</td>
+
+            <ng-container *ngFor="let name of sysNames">
+                <td *ngIf="name.type !== 'date'">{{name.name && name.name == 'password' ? '*** ':user[name.name]}}</td>
+                <td *ngIf="name.type == 'date'"> {{ user[name.name] | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table> -->
+

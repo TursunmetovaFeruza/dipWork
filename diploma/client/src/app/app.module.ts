@@ -16,7 +16,9 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AddComponent } from './add/add.component';
-
+import {DropdownModule} from 'primeng/dropdown';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import "chosen-js"
 
 @NgModule({
   declarations: [
@@ -33,11 +35,13 @@ import { AddComponent } from './add/add.component';
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DropdownModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

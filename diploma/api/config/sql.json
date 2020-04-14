@@ -28,8 +28,8 @@ select   master.name as name, master.surname as surname , master.fathername as f
 INNER JOIN school ON master.school_id = school.id
 
 
--- insert into students (id,name,surname, fathername,enrollment_year,curs_id,lang_id,group_id, email,lection_id,faculty_id,school_id,specialty_id) 
--- values (2,'Lee','Don','Mo',2016,1,1,1,'ledon@gmail.com',array[1,2,3],1,1,1)
+ insert into students (id,name,surname, fathername,enrollment_year,curs_id,lang_id,group_id, email,lection_id,faculty_id,school_id,specialty_id) 
+ values (2,'Lee','Don','Mo',2016,1,1,1,'ledon@gmail.com',array[1,2,3],1,1,1)
 
 --  select  username, password, students.name as name, students.surname as surname , students.fathername as fathername, 
 --  students.enrollment_year as enrollment_year, curses_number.number as course, language.name as language, groups.name as group,
@@ -77,3 +77,56 @@ values (4, 'Добавить', 'bar/add','add','admin',
         "sysname": "lections"
     }
 ]')
+
+update menu set child ='[
+    {
+        "url": "bar/add/students",
+        "name": "Добавить студнета",
+        "sysname": "student"
+    },
+    {
+        "url": "bar/add/masters",
+        "name": "Добавить преподавателья",
+        "sysname": "master"
+    },
+    {
+        "url": "bar/add/credentials",
+        "name": "Добавить учетную запись",
+        "sysname": "credential"
+    },
+    {
+        "url": "bar/add/events",
+        "name": "Добавить event",
+        "sysname": "event"
+    },
+    {
+        "url": "bar/add/lections",
+        "name": "Добавить лекцию",
+        "sysname": "lection"
+    }
+]' where id = 4
+
+<!-- -- insert into menu (id, name, url,sysname,userinfo,child) values (2,'Тест', 'bar/test', 'test', 'admin', '{"url":"bar/test/help","name":"help", "sysname":"help"}')
+-- update menu set child = '[{"url":"bar/test/help","name":"help", "sysname":"help"}]' where id = 2
+-- select * from usertype
+--  select * from students
+--   insert into menu (id,name,url,sysname,userinfo,child) values (2,'Профиль', 'bar/profile','profile','user',null)
+-- update  menu set userinfo= 'student' where id =2
+--  delete from menu where id=2
+-- select * from usertype
+-- select * from curses_number
+--   select username, password, students.name as name, students.surname as surname , students.fathername as fathername, 
+--  students.enrollment_year as enrollment_year, curses_number.number as course, language.name as language, groups.name as group,
+--  email, faculty.name as faculty, school.name as school, specialty.name as speciality 
+--   FROM users
+--  INNER JOIN students ON users.user_info_id =students.id 
+--  INNER JOIN curses_number ON students.curs_id = curses_number.id  
+--  INNER JOIN language ON students.lang_id = language.id  
+--  INNER JOIN groups ON students.group_id = groups.id 
+--  INNER JOIN faculty ON students.faculty_id = faculty.id 
+-- INNER JOIN school ON students.school_id = school.id 
+-- INNER JOIN specialty ON students.specialty_id = specialty.id 
+-- where users.id = 2
+-- update users set usertype = 1 where id = 2
+
+-- select * from users inner join usertype on users.usertype = usertype.id -->

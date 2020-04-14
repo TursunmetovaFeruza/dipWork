@@ -28,20 +28,38 @@ func GetUser(c *gin.Context) {
 			"INNER JOIN specialty ON students.specialty_id = specialty.id " +
 			"where users.id =$1"
 	} else if usertype == "admin" {
-
+		query = "select username, password " +
+			"FROM users " +
+			"where users.id =$1"
 	} else if usertype == "master" {
-
+		query = "select username, password, master.name as name, master.surname as surname , master.fathername as fathername, " +
+			"email, lection_id, faculty.name as faculty, school.name as school " +
+			"FROM users " +
+			"INNER JOIN master ON users.user_info_id = master.id " +
+			"INNER JOIN faculty ON master.faculty_id = faculty.id " +
+			"INNER JOIN school ON master.school_id = school.id " +
+			"where users.id =$1"
 	}
 	// user := model_user.SignIn{}
 
 	// var usertype string
-	user := model_student.StudentGet{}
 	res := db.QueryRow(query, userid)
-	err := res.Scan(&user.Username, &user.Password, &user.Name, &user.Surname, &user.Fathername, &user.EnrollmentYear, &user.Course, &user.Language,
-		&user.Group, &user.Email, &user.LectionId, &user.Faculty, &user.School, &user.Speciality)
+	user := model_student.StudentGet{}
+	var err interface{}
+	if usertype == "student" {
+		err = res.Scan(&user.Username, &user.Password, &user.Name, &user.Surname, &user.Fathername, &user.EnrollmentYear, &user.Course, &user.Language,
+			&user.Group, &user.Email, &user.LectionId, &user.Faculty, &user.School, &user.Speciality)
+	} else if usertype == "admin" {
+		err = res.Scan(&user.Username, &user.Password)
+	} else if usertype == "master" {
+		err = res.Scan(&user.Username, &user.Password, &user.Name, &user.Surname, &user.Fathername, &user.Email, &user.LectionId,
+			&user.Faculty, &user.School)
+	}
+
 	if err != nil {
 		fmt.Println("signIn problem:", err)
 	} else {
+		fmt.Println(user)
 		c.JSON(200, gin.H{
 			"message": "Succes",
 			"user":    &user,

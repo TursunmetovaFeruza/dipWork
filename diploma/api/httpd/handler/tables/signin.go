@@ -85,8 +85,14 @@ func SignUp(c *gin.Context) {
 		repos = append(repos, p)
 	}
 	index := repos[0].ID + 1
+	var userinfo interface{}
+	if user.UserInfo != 0 {
+		userinfo = user.UserInfo
+	} else {
+		userinfo = nil
+	}
 	res, err := db.Exec("insert into users (id, username, password,created_at,updated_at,user_info_id,usertype) values ( $1, $2,$3,$4,$5,$6,$7)",
-		index, user.Username, hashedPassword, time.Now(), time.Now(), nil, user.UserType)
+		index, user.Username, hashedPassword, time.Now(), time.Now(), userinfo, user.UserType)
 	if err != nil {
 		fmt.Println("create error:", err)
 	}

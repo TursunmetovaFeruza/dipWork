@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
-import {DropdownModule} from 'primeng/dropdown';
-import {SelectItem} from 'primeng/api';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -13,6 +11,7 @@ export class UsersComponent implements OnInit {
   public sysNames
   selectedCar: string;
 
+  public stdate = new Date(2020,1,20)
   constructor(
     private apiService: ApiService,
     public activatedRoute: ActivatedRoute
@@ -42,7 +41,7 @@ export class UsersComponent implements OnInit {
  
   ngOnInit(): void {
   // console.log(this.items)
-  }
+}
 
  getSysName(child){
   if (!child) return

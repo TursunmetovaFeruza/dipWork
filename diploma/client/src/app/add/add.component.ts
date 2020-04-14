@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  public addtype
+  public date
+  constructor(
+    public activatedRoute: ActivatedRoute
 
-  constructor() { }
+  ) {
+    this.activatedRoute.params.subscribe(async ({ child }) => {
+      this.addtype = child
+      this.date = new Date()
+    })
+  }
 
   ngOnInit(): void {
+
   }
 
 }
