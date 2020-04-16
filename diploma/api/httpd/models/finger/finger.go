@@ -9,7 +9,3 @@ type Finger struct {
 
 //items of Finger
 type Fingers []Finger
-
-type Ids struct {
-	id []string `json:"id" bson:"id"`
-}

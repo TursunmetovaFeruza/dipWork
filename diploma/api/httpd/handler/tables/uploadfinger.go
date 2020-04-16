@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lib/pq"
 )
 
 func UploadFile(c *gin.Context) {
@@ -26,7 +27,7 @@ func UploadFile(c *gin.Context) {
 	finger, _ := ReadUploadedfile(file)
 	for i := 0; i < len(ints); i++ {
 		p := model_finger.Finger{}
-		rows := db.QueryRow("select finger from finger where finger=$1 || studentid=$2", finger[i+1], ints[i])
+		rows := db.QueryRow("select finger from finger where finger=$1 or studentid=$2", finger[i+1], ints[i])
 		err := rows.Scan(&p.Finger)
 		if err == nil {
 			inserted = true
@@ -108,4 +109,53 @@ func getFingerPrints(f multipart.File, byt []byte, count int) (map[int][]byte, e
 		fingerprints[i] = v
 	}
 	return fingerprints, nil
+}
+
+func UploadAttendance(c *gin.Context) {
+	db := PostSQLConfig()
+	file, _ := c.FormFile("file")
+	students := c.PostForm("s")
+	id := c.PostForm("id")
+	eventId, _ := strconv.Atoi(id)
+	var ints []int
+	var stid []int
+	var attend []int
+	var apsent []int
+	err := json.Unmarshal([]byte("["+students+"]"), &ints)
+	if err != nil {
+		log.Fatal(err)
+	}
+	finger, _ := ReadUploadedfile(file)
+	for i := 0; i < len(ints); i++ {
+		p := model_finger.Finger{}
+		rows := db.QueryRow("select studentid from finger where finger=$1", finger[i+1])
+		err := rows.Scan(&p.StudentId)
+		if err == nil {
+			stid = append(stid, p.StudentId)
+		}
+	}
+	for i := 0; i < len(ints); i++ {
+		v := 0
+		for j := 0; j < len(stid); j++ {
+			if ints[i] == stid[j] {
+				v = stid[j]
+			}
+		}
+		if v > 0 {
+			attend = append(attend, v)
+		} else {
+			apsent = append(apsent, ints[i])
+		}
+	}
+	rows, err := db.Query("update attendance set upsent = $1, attend = $2 where id = $3", pq.Array(apsent), pq.Array(attend), eventId)
+
+	if err != nil {
+		fmt.Println("create error:", err)
+	}
+	c.JSON(200, gin.H{
+		"message": "Succes",
+		"user":    &rows,
+	})
+
+	defer db.Close()
 }

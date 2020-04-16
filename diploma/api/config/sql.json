@@ -9,7 +9,11 @@
 -- 	school_id int not null
 -- )
 -- select * from students
---  update students set lection_id =  lection_id || '{1,2,3}' where id = 1
+--  update students set lection_id =  lection_id || '{
+    1,
+    2,
+    3
+}' where id = 1
 -- update students set lection_id =  null where id = 1
 -- create table attendance(
 -- id int not null primary key,
@@ -29,7 +33,20 @@ INNER JOIN school ON master.school_id = school.id
 
 
  insert into students (id,name,surname, fathername,enrollment_year,curs_id,lang_id,group_id, email,lection_id,faculty_id,school_id,specialty_id) 
- values (2,'Lee','Don','Mo',2016,1,1,1,'ledon@gmail.com',array[1,2,3],1,1,1)
+ values (2,'Lee','Don','Mo',
+2016,
+1,
+1,
+1,'ledon@gmail.com',array[
+    1,
+    2,
+    3
+],
+1,
+1,
+1)
+ALTER TABLE users
+    ALTER COLUMN updated_at TYPE TIMESTAMP USING '2004-10-19 10:23:54';
 
 --  select  username, password, students.name as name, students.surname as surname , students.fathername as fathername, 
 --  students.enrollment_year as enrollment_year, curses_number.number as course, language.name as language, groups.name as group,
@@ -106,8 +123,18 @@ update menu set child ='[
     }
 ]' where id = 4
 
-<!-- -- insert into menu (id, name, url,sysname,userinfo,child) values (2,'Тест', 'bar/test', 'test', 'admin', '{"url":"bar/test/help","name":"help", "sysname":"help"}')
--- update menu set child = '[{"url":"bar/test/help","name":"help", "sysname":"help"}]' where id = 2
+<!-- -- insert into menu (id, name, url,sysname,userinfo,child) values (2,'Тест', 'bar/test', 'test', 'admin', '{
+    "url": "bar/test/help",
+    "name": "help",
+    "sysname": "help"
+}')
+-- update menu set child = '[
+    {
+        "url": "bar/test/help",
+        "name": "help",
+        "sysname": "help"
+    }
+]' where id = 2
 -- select * from usertype
 --  select * from students
 --   insert into menu (id,name,url,sysname,userinfo,child) values (2,'Профиль', 'bar/profile','profile','user',null)
@@ -130,3 +157,20 @@ update menu set child ='[
 -- update users set usertype = 1 where id = 2
 
 -- select * from users inner join usertype on users.usertype = usertype.id -->
+select  attend.id, lection.name as lection,  master.name as master, 
+starttime, endtime, array_agg(students.surname || ' ' || students.name || ' ' || students.fathername) 
+FROM attendance attend
+INNER JOIN lection ON attend.lectionid = lection.id
+INNER JOIN master ON attend.masterid = master.id
+JOIN     students ON students.id = ANY(attend.students) 
+GROUP BY attend.id,master.name,starttime,endtime,lection.name;
+
+DISTINCT select  attend.id, lection.name as lection,  string_agg(master.surname || ' ' || master.name || ' ' || master.fathername,'')  as master, 
+starttime, endtime, array_agg(students.surname || ' ' || students.name || ' ' || students.fathername) 
+FROM attendance attend 
+INNER JOIN lection ON attend.lectionid = lection.id
+INNER JOIN master ON attend.masterid = master.id
+JOIN     students ON students.id = ANY(attend.students) 
+where attend.masterid = 1
+GROUP BY attend.id,master.name,starttime,endtime,lection.name 
+

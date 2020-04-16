@@ -1,0 +1,81 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9">
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-circle profile-avatar"
+                            alt="User avatar">
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Лекция</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Леккция</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" [(ngModel)]="lection"
+                                [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let o of lections" value="{{o.id}}">
+                                    {{o.name}}
+                                </option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Начало</label>
+                            <div class="col-sm-10">
+                                <input type="datetime-local" [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Конец</label>
+                            <div class="col-sm-10">
+                                <input type="datetime-local" [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Преподаватель</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" [(ngModel)]="master"
+                                [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let o of masters" value="{{o.id}}">
+                                    {{o.name}}
+                                </option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Студенты</label>
+                            <div class="col-sm-10">
+                                <select class="form-control"  name="select[]" multiple="multiple"[(ngModel)]="student" 
+                                [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let o of students" value="{{o.id}}">
+                                    {{o.name}}
+                                </option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                  
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button type="submit" (click)="getEventValue()"class="btn btn-primary">Создать</button>
+                                <button type="reset" class="btn btn-default">Отмена</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

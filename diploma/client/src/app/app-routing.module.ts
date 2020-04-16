@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AddComponent } from './add/add.component';
 import { FingerComponent } from './finger/finger.component';
+import { EventComponent } from './event/event.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path:'add/finger',
         component:FingerComponent
+      },
+      {
+        path:'add/events',
+        component:EventComponent
       },
       {
         path: 'add/:child',

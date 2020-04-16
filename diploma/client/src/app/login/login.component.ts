@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
       if (res.message == "Succes") {
         sessionStorage.setItem('user',res.userType)
         sessionStorage.setItem('userId',res.user_id)
+        sessionStorage.setItem('userinfoid',res.user_info_id)
         this.router.navigate(['bar'])
         this.incorrect = false
       } else {

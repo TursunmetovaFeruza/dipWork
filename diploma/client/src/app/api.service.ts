@@ -72,6 +72,17 @@ export class ApiService {
     let query = qs.stringify({user});
     return this.http.get<any>(`api/getMenuItems?${query}`)
   }
+
+  GetAllEventsForMaster(master): any {
+    let query = qs.stringify({master});
+    return this.http.get<any>(`api/GetAllEventsForMaster?${query}`)
+  }
+
+  GetAllEventsForStudent(student): any {
+    let query = qs.stringify({student});
+    return this.http.get<any>(`api/GetAllEventsForStudent?${query}`)
+  }
+
   getUser(id, type): any {
     let query = qs.stringify({id, type});
     return this.http.get<any>(`api/getUser?${query}`)
@@ -83,6 +94,21 @@ export class ApiService {
     fd.append('filetype', 'csv');
     fd.append('f', 'json');
     return this.http.post<any>('api/UploadFile',fd,stud)
+  }
+  UploadAttendance(id,stud,file): any {
+    var fd = new FormData();
+    fd.append('file', file);
+      fd.append('s', stud);
+      fd.append('id', id);
+    fd.append('filetype', 'csv');
+    fd.append('f', 'json');
+    return this.http.post<any>('api/UploadAttendance',fd,stud)
+  }
+  SetAttendance(event):any {
+    return this.http.post<any>('api/SetAttendance',event)
+  }
+  GetAllEvents() {
+    return this.http.get<any>('api/GetAllEvents')
   }
 
 }

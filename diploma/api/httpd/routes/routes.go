@@ -15,6 +15,7 @@ func (c Routes) StartGin() {
 	api := r.Group("/api")
 	{
 		api.POST("/UploadFile", handle_user.UploadFile)
+		api.POST("/UploadAttendance", handle_user.UploadAttendance)
 		api.GET("/GetAllUsers", handle_user.GetAllUsers)
 		api.GET("/GetAllStudents", handle_user.GetAllStudents)
 		api.GET("/GetAllMaters", handle_user.GetAllMaters)
@@ -32,7 +33,10 @@ func (c Routes) StartGin() {
 		api.GET("/GetLanguages", handle_user.GetLanguages)
 		api.GET("/GetLections", handle_user.GetLections)
 		api.GET("/GetUserType", handle_user.GetUserType)
-
+		api.GET("/GetAllEvents", handle_user.GetAllEvents)
+		api.POST("/SetAttendance", handle_user.SetAttendance)
+		api.GET("/GetAllEventsForMaster", handle_user.GetAllEventsForMaster)
+		api.GET("/GetAllEventsForStudent", handle_user.GetAllEventsForStudent)
 	}
-	r.Run("0.0.0.0:2000")
+	r.Run("0.0.0.0:6000")
 }

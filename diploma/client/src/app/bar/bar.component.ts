@@ -37,7 +37,6 @@ export class BarComponent implements OnInit {
         el.clicked = true?false:true
         this.router.navigate([el.url])
       } 
-      el.clicked = false;
     });
   }
   gotosub(url){

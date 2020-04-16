@@ -117,8 +117,8 @@ func SignIn(c *gin.Context) {
 	}
 	var usertype string
 	stored := model_user.SignIn{}
-	res := db.QueryRow("select password, users.id as id, usertype.name as type from users inner join usertype on users.usertype = usertype.id where username=$1", user.Username)
-	err = res.Scan(&stored.Password, &stored.UserInfo, &usertype)
+	res := db.QueryRow("select password, users.id as id,users.user_info_id as idtype, usertype.name as type from users inner join usertype on users.usertype = usertype.id where username=$1", user.Username)
+	err = res.Scan(&stored.Password, &stored.ID, &stored.UserInfo, &usertype)
 	if err != nil {
 		fmt.Println("signIn problem:", err)
 	}
@@ -128,10 +128,11 @@ func SignIn(c *gin.Context) {
 		})
 	} else {
 		c.JSON(200, gin.H{
-			"message":  "Succes",
-			"user":     &user.Username,
-			"user_id":  &stored.UserInfo,
-			"userType": &usertype,
+			"message":      "Succes",
+			"user":         &user.Username,
+			"user_id":      &stored.ID,
+			"user_info_id": &stored.UserInfo,
+			"userType":     &usertype,
 		})
 	}
 	defer db.Close()

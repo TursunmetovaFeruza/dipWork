@@ -20,6 +20,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FingerComponent } from './finger/finger.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     AttendanceComponent,
     AddComponent,
-    FingerComponent
+    FingerComponent,
+    EventComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
